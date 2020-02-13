@@ -1,0 +1,11 @@
+{
+  "files": [
+      "src/ts/main.ts"
+  ],
+  "compilerOptions": {
+      "noImplicitAny": true,
+      "target": "es2015"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
