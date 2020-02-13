@@ -32,7 +32,7 @@ function get(url, success, fail) {
 		if (httpRequest.status === 200) {
 			success(httpRequest.responseText);
 		} else {
-			fail(httpRequest.status);
+			fail(httpRequest.status, httpRequest.responseText);
 		}
 	};
 
@@ -60,8 +60,13 @@ function successHandler(data) {
 	weatherDiv.innerHTML = weatherDiv.innerHTML + fragment;
 }
 
-function failHandler(status) {
-	console.log("request faild status : " + status);
+function failHandler(status, txt) {
+	console.log("request faild status : " + status + " txt : " + txt);
+
+	const errorFrag = `<div class="alert alert-danger" role="alert">status : ${status}, error : ${txt}
+  </div>`;
+	const weatherError = document.querySelector("#weather-error");
+	weatherError.innerHTML = errorFrag;
 }
 
 function tempToF(kelvin) {
