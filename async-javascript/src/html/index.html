@@ -2,28 +2,18 @@
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    crossorigin="anonymous">
-  <script src="https://kit.fontawesome.com/bdaba457d9.js" crossorigin="anonymous"></script>
+  @@include('./header.html')
   <title>Home</title>
 </head>
 
 <body>
-
+  @@include('./nav.html')
 
   <div class="container">
-    <!-- Image and text -->
-    <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="#"><i class="fas fa-home"></i>
-        Home
-      </a>
-    </nav>
-
+    <h3>Async - Javascript</h3>
+    <div class="list-group">
+      <a href="./weather.html" class="list-group-item list-group-item-action">Weather - Async with Callback</a>
+    </div>
   </div>
 
   <script src="bundle.js"></script>

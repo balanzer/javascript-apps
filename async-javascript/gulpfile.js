@@ -13,12 +13,21 @@ const del = require("del");
 
 const browserSync = require("browser-sync").create();
 
+var fileinclude = require("gulp-file-include");
+
 const origin = "src";
 const destination = "build";
 
 function html(cb) {
 	//console.log("doing html task");
-	src(`${origin}/html/**/*.html`).pipe(dest(`${destination}`));
+	src(`${origin}/html/**/*.html`)
+		.pipe(
+			fileinclude({
+				prefix: "@@",
+				basepath: "@file"
+			})
+		)
+		.pipe(dest(`${destination}`));
 	//console.log("html task completed");
 	cb();
 }

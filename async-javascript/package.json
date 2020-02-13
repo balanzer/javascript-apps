@@ -19,6 +19,7 @@
 		"browserify": "^16.5.0",
 		"del": "^5.1.0",
 		"gulp": "^4.0.0",
+		"gulp-file-include": "^2.1.1",
 		"gulp-sourcemaps": "^2.6.5",
 		"gulp-typescript": "^6.0.0-alpha.1",
 		"gulp-uglify": "^3.0.2",
