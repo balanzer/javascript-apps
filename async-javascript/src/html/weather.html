@@ -10,8 +10,23 @@
   @@include('./nav.html')
 
   <div class="container">
-    <h4>Async with callback - check console logs</h4>
-    <h4>Weather in Fahrenheit</h4>
+    <h4>Async with callback - check console logs</h4><br>
+    <h4>Weather in Fahrenheit</h4><br>
+
+
+    <form class="form-inline">
+      <div class="form-group mb-2">
+        <input type="text" readonly class="form-control-plaintext" id="staticval" value="City">
+      </div>
+      <div class=" form-group mx-sm-3 mb-2">
+        <label for="city-req" class="sr-only">City</label>
+        <input type="text" class="form-control" id="city-req" placeholder="">
+      </div>
+      <a class="btn btn-primary mb-2" href="javascript:getWeather()" role="button">Get Weather</a>
+    </form>
+    <div class="container" id="weather-error">
+    </div>
+
     <div class="container" id="weather-data"></div>
 
 

@@ -1,16 +1,27 @@
 document.addEventListener("DOMContentLoaded", function() {
 	const defaultCity = "atlanta";
 	getWeather(defaultCity);
-	getWeather("miami");
-	getWeather("london,uk");
 });
 function getWeather(city = "") {
+	const weatherError = document.querySelector("#weather-error");
+	weatherError.innerHTML = "";
+
+	if (null == city || city.trim().length < 1) {
+		city = document.getElementById("city-req").value;
+	}
 	console.log("getWeather city : " + city);
-	const apiKey = "1c4698160a3a51fad3e7f6ac00bb993e";
+	if (city.trim().length > 1) {
+		const apiKey = "1c4698160a3a51fad3e7f6ac00bb993e";
 
-	const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}`;
+		const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}`;
 
-	get(url, successHandler, failHandler);
+		get(url, successHandler, failHandler);
+	} else {
+		const errorFrag = `<div class="alert alert-danger" role="alert">Enter valid value for City
+    </div>`;
+		const weatherError = document.querySelector("#weather-error");
+		weatherError.innerHTML = errorFrag;
+	}
 }
 
 function get(url, success, fail) {
@@ -43,7 +54,7 @@ function successHandler(data) {
 	)}, Min - ${tempToF(dataObj.main.temp_min)}, Max - ${tempToF(dataObj.main.temp_min)} </li>
     </ul>
   </div>
-</div>`;
+</div><HR>`;
 
 	const weatherDiv = document.querySelector("#weather-data");
 	weatherDiv.innerHTML = weatherDiv.innerHTML + fragment;
