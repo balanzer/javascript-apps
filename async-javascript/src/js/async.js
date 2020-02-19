@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 	const defaultCity = "dunwoody,ga,usa";
 	getWeatherCallBack(defaultCity);
+	getWeatherPromiseMultiple();
 });
 
 function getAPI(city = "") {
@@ -9,6 +10,29 @@ function getAPI(city = "") {
 	const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}`;
 
 	return url;
+}
+
+function getWeatherPromiseMultiple() {
+	const locations = ['atlanta,us', 'miami,us', 'new+york,us', 'stamford,us', 'suwanee,us', 'los+angeles,us', 'denver,us', 'fairbanks,us', 'seattle,us'];
+
+	const urls = locations.map(function (location) {
+		return getAPI(location);
+	});
+
+	Promise.all(urls.map(function (url) {
+		return getPromise(url);
+	})).then(function (responses) {
+		return responses.map(function (response) {
+			successHandler(response);
+		});
+
+	}).catch(function (status) {
+		console.error("getWeatherPromiseMultiple error status : " + status);
+		failHandler(status);
+	}).finally(function () {
+		console.log("getWeatherPromiseMultiple - finanally");
+	});
+
 }
 
 function resetError() {
@@ -32,18 +56,18 @@ function getWeatherPromise(city = "") {
 	//console.log("getWeather city : " + city);
 	if (city.trim().length > 1) {
 		getPromise(getAPI(city))
-			.then(function(response) {
+			.then(function (response) {
 				console.log("promise 1st then for city : " + city);
 				successHandler(response);
 			})
-			.then(function(response) {
+			.then(function (response) {
 				console.log("promise 2nd then for city : " + city);
 			})
-			.catch(function(status) {
+			.catch(function (status) {
 				console.error("promise error status : " + status);
 				failHandler(status);
 			})
-			.finally(function() {
+			.finally(function () {
 				console.log("promise finanally for city : " + city);
 			});
 	} else {
@@ -67,11 +91,11 @@ function getWeatherCallBack(city = "") {
 }
 
 function getPromise(url) {
-	return new Promise(function(resolve, reject) {
+	return new Promise(function (resolve, reject) {
 		let httpRequest = new XMLHttpRequest();
 		httpRequest.open("GET", url);
 
-		httpRequest.onload = function() {
+		httpRequest.onload = function () {
 			if (httpRequest.status === 200) {
 				// Resolve the promise with the response text
 				// success(httpRequest.responseText);
@@ -84,7 +108,7 @@ function getPromise(url) {
 		};
 
 		// Handle network errors
-		httpRequest.onerror = function() {
+		httpRequest.onerror = function () {
 			reject(Error("Network Error"));
 		};
 
@@ -96,7 +120,7 @@ function getCallBack(url, success, fail) {
 	let httpRequest = new XMLHttpRequest();
 	httpRequest.open("GET", url);
 
-	httpRequest.onload = function() {
+	httpRequest.onload = function () {
 		if (httpRequest.status === 200) {
 			success(httpRequest.responseText);
 		} else {
@@ -111,18 +135,23 @@ function successHandler(data) {
 	const dataObj = JSON.parse(data);
 	//console.log(dataObj);
 	const city = `${dataObj.name},${dataObj.sys.country}`;
-	const fragment = `  <div class="card">
-  <h5 class="card-header"> <img src="http://openweathermap.org/img/w/${dataObj.weather[0]
-		.icon}.png" width="50" height="50" />${dataObj.name},
-  ${dataObj.sys.country} - ${dataObj.weather[0].main} - ${dataObj.weather[0].description}</h5>
-  <div class="card-body">
-    <ul class="list-group">
-      <li class="list-group-item">Temprature - ${tempToF(dataObj.main.temp)}, Feels Like - ${tempToF(
-		dataObj.main.feels_like
-	)}, Min - ${tempToF(dataObj.main.temp_min)}, Max - ${tempToF(dataObj.main.temp_min)} </li>
-    </ul>
-  </div>
-</div><HR>`;
+	const fragment = `
+<div class="card" style="width: 18rem;">
+<div class="card-body">
+  <h5 class="card-title"> <img src="http://openweathermap.org/img/w/${dataObj.weather[0]
+			.icon}.png" width="50" height="50" /> ${dataObj.name},
+  ${dataObj.sys.country}</h5>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Temprature - ${tempToF(dataObj.main.temp)}  &#8457;</li> <li class="list-group-item">Feels Like - ${tempToF(
+				dataObj.main.feels_like
+			)}  &#8457;</li> <li class="list-group-item">Min - ${tempToF(dataObj.main.temp_min)}  &#8457;</li> <li class="list-group-item">Max - ${tempToF(dataObj.main.temp_min)}  &#8457;</li>
+</ul>
+</div>
+</div>
+`;
+
+
+
 
 	const weatherDiv = document.querySelector("#weather-data");
 	weatherDiv.innerHTML = weatherDiv.innerHTML + fragment;
