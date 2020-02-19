@@ -133,21 +133,17 @@ function getCallBack(url, success, fail) {
 
 function successHandler(data) {
 	const dataObj = JSON.parse(data);
+	console.log(dataObj);
 	//console.log(dataObj);
 	const city = `${dataObj.name},${dataObj.sys.country}`;
 	const fragment = `
-<div class="card" style="width: 18rem;">
-<div class="card-body">
-  <h5 class="card-title"> <img src="http://openweathermap.org/img/w/${dataObj.weather[0]
+<ul class="list-group">
+<li class="list-group-item"><img src="http://openweathermap.org/img/w/${dataObj.weather[0]
 			.icon}.png" width="50" height="50" /> ${dataObj.name},
-  ${dataObj.sys.country}</h5>
-<ul class="list-group list-group-flush">
-  <li class="list-group-item">Temprature - ${tempToF(dataObj.main.temp)}  &#8457;</li> <li class="list-group-item">Feels Like - ${tempToF(
+			${dataObj.sys.country} <small>| ${dataObj.weather[0].main} | ${dataObj.weather[0].description} | Temprature - ${tempToF(dataObj.main.temp)}  &#8457; | Feels Like - ${tempToF(
 				dataObj.main.feels_like
-			)}  &#8457;</li> <li class="list-group-item">Min - ${tempToF(dataObj.main.temp_min)}  &#8457;</li> <li class="list-group-item">Max - ${tempToF(dataObj.main.temp_min)}  &#8457;</li>
+			)}  &#8457; | Min - ${tempToF(dataObj.main.temp_min)}  &#8457; | Max - ${tempToF(dataObj.main.temp_min)}  &#8457;</small></li>
 </ul>
-</div>
-</div>
 `;
 
 
