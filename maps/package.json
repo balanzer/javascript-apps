@@ -6,6 +6,9 @@
     "build": "parcel build"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@types/google.maps": "^3.55.4",
+    "buffer": "^6.0.3",
     "parcel": "latest"
   }
 }
