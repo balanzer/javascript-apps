@@ -107,3 +107,6 @@ dist
 
 #idea files
 .idea
+
+#Parcel files
+.parcel-cache
