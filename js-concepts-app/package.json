@@ -1,0 +1,19 @@
+{
+  "name": "js-concepts-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "module": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "esm": "^3.2.25"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}

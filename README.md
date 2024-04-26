@@ -2,6 +2,14 @@
 
 repo for random java script apps
 
+## Create new application folders
+
+`mkdir new-app && cd new-app`
+
+## init new project
+
+`npm init -y`
+
 ## Clean install a project
 
 npm ci
