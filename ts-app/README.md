@@ -1,5 +1,12 @@
 # TS App
 
+## Running npm install
+
+`npm install`
+
+npm install will read the package.json file and download all the specified dependencies. It will create a folder named
+“node_modules” in your project directory, where it stores all the installed packages.
+
 ## install NodeMon & Concurrently
 
 npm install nodemon concurrently --save-dev
