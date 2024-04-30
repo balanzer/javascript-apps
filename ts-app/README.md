@@ -33,3 +33,7 @@ npm install gulp-concat --save-dev
 ### Install plugins gulp-sass and sass
 
 npm install sass gulp-sass --save-dev
+
+### gulp-uglify-es
+
+npm install gulp-uglify-es --save-dev
