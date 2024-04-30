@@ -12,11 +12,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^20.12.7",
     "esm": "^3.2.25"
   },
   "devDependencies": {
+    "@types/node": "^20.12.7",
     "concurrently": "^8.2.2",
-    "nodemon": "^3.1.0"
+    "gulp": "^5.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^5.1.0",
+    "nodemon": "^3.1.0",
+    "sass": "^1.75.0",
+    "typescript": "^5.4.5"
   }
 }
