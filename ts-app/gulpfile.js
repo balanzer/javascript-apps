@@ -2,6 +2,7 @@ const {src, dest} = require("gulp");
 const concat = require("gulp-concat");
 const scss = require("gulp-sass")(require("sass"));
 const uglify = require("gulp-uglify-es").default;
+const minify = require("gulp-babel-minify");
 
 function createStyles() {
     return src("./src/scss/**/*.scss")
@@ -10,9 +11,13 @@ function createStyles() {
 }
 
 function createScripts() {
-    return src("./build/**/*.js")
+    return src("./build/**/*.js").pipe(minify({
+        mangle: {
+            keepClassName: false
+        }
+    }))
         .pipe(concat("index.min.js"))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(dest("./dist/js/"));
 }
 
