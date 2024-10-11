@@ -9,12 +9,17 @@
   "author": "Murali Varatharajan",
   "license": "ISC",
   "devDependencies": {
+    "browserify": "^17.0.1",
     "gulp": "^4.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-hub": "^4.2.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-terser": "^2.1.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "tsify": "^5.0.4",
     "tsproject": "^4.1.0-dev.1",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
   }
 }
