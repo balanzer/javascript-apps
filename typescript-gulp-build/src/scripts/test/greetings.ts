@@ -1,5 +1,8 @@
+import { Logger } from "../common/logger/Logger";
+
 export class Greetings {
+  logger = new Logger("Greetings");
   greet(name: string) {
-    console.log(`Welcome user ${name}`);
+    this.logger.info(`Welcome user ${name}`);
   }
 }
