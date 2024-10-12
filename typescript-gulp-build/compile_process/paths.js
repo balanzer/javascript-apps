@@ -1,6 +1,7 @@
 var path = require("path");
 
-var sourceRoot = "src/";
+var sourceRoot = "src/scripts";
+var styleRoot = "src/styles";
 var buildRoot = "./dist/";
 var bundleRoot = buildRoot;
 
