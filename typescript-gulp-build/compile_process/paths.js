@@ -14,4 +14,7 @@ module.exports = {
   source: sourceRoot + "**/*.ts",
   output: buildRoot,
   release: bundleRoot,
+  script_out: bundleRoot + "bundle-min.js",
+  style_out: bundleRoot + "style.css",
+  offer_out: bundleRoot + "offer.txt",
 };

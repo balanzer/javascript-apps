@@ -5,4 +5,8 @@ const registry = require("gulp-hub");
 const hub = new registry(["./compile_process/tasks/*.js"]);
 gulp.registry(hub);
 
-gulp.task("build", gulp.series("clean", "bundle"), function () {});
+gulp.task(
+  "build",
+  gulp.series("clean", "bundle", "create-offer"),
+  function () {}
+);
