@@ -1,0 +1,14 @@
+{
+  "name": "my-test-ext",
+  "version": "1.0.0",
+  "description": "simple script",
+  "manifest_version": 3,
+  "author": "Mtv",
+  "content_scripts": [
+    {
+      "matches": ["https://*.ihg.com/*"],
+      "js": ["script.js"],
+      "css": ["style.css"]
+    }
+  ]
+}
