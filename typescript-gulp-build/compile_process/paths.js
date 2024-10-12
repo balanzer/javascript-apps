@@ -1,8 +1,8 @@
 var path = require("path");
 
 var sourceRoot = "src/";
-var buildRoot = "./output/";
-var bundleRoot = buildRoot + "output-bundle/";
+var buildRoot = "./dist/";
+var bundleRoot = buildRoot;
 
 module.exports = {
   root: sourceRoot,
