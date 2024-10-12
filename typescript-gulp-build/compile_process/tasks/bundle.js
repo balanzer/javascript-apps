@@ -19,7 +19,7 @@ gulp.task("browserify", function () {
   return browserify({
     basedir: ".",
     debug: true,
-    entries: ["src/index.ts"],
+    entries: [paths.entery_ts],
     cache: {},
     packageCache: {},
   })
