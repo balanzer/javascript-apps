@@ -1,6 +1,6 @@
-var gulp = require("gulp");
-var paths = require("../paths");
-var clean = require("gulp-clean");
+const gulp = require("gulp");
+const paths = require("../paths");
+const clean = require("gulp-clean");
 
 gulp.task("clean", function () {
   return gulp

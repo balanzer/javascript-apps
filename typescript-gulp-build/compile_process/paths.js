@@ -1,10 +1,10 @@
-var path = require("path");
+const path = require("path");
 
-var sourceRoot = "src/scripts/";
-var styleRoot = "src/styles/";
-var scriptMain = sourceRoot + "index.ts";
-var buildRoot = "./dist/";
-var bundleRoot = buildRoot;
+const sourceRoot = "src/scripts/";
+const styleRoot = "src/styles/";
+const scriptMain = sourceRoot + "index.ts";
+const buildRoot = "./dist/";
+const bundleRoot = buildRoot;
 
 module.exports = {
   root: sourceRoot,
