@@ -110,3 +110,8 @@ dist
 
 #Parcel files
 .parcel-cache
+
+
+# System Files
+.DS_Store/
+.DS_Store
