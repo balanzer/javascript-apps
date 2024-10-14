@@ -2,7 +2,7 @@ export class Logger {
   constructor(private readonly name: string) {}
 
   logMessage(level: string, message: string, ...args: any[]) {
-    const logger_message = `**target[${this.name}] - ${message} ${args}`;
+    const logger_message = `***target[${this.name}] - ${message} ${args}`;
 
     if (level === "error") {
       console.error(logger_message);

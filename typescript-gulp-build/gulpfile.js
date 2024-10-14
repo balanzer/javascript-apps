@@ -10,3 +10,5 @@ gulp.task(
   gulp.series("clean", "bundle", "create-offer"),
   function () {}
 );
+
+gulp.task("build-watchify", gulp.series("bundle-watchify"), function () {});
