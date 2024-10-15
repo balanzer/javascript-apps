@@ -31,7 +31,7 @@ let intervalId = setInterval(() => {
 setTimeout(() => {
   clearInterval(intervalId);
 }, 10000);
-function callback(selector, value) {
+function callback(selector: any, value: string) {
   logger.info("callback for selector: ", selector, ", value : ", value);
 }
 //create obj
