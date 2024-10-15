@@ -6,7 +6,7 @@ export class DomObserver {
   /**
    * DomObserver to observe changes in dom.
    */
-  constructor(private readonly name: string) {}
+  constructor(private readonly name: string) { }
 
   /**
    * to watch for element
@@ -54,10 +54,13 @@ export class DomObserver {
     });
   }
 
+
+
   /**
    * watcher - to watch selector loaded or not, timeout after given waitTimeInSecs
-   * @param selector
-   * @param waitTimeInSecs
+   * @param selector 
+   * @param waitTimeInSecs 
+   * @param callback 
    */
   async watchSelector(
     selector: string,
@@ -80,7 +83,7 @@ export class DomObserver {
       }
 
       if (typeof callback !== "function") {
-        logger.log("invalid callback function ", waitTimeInSecs);
+        logger.log("invalid callback function");
         throw new TypeError("invalid callback function");
       }
       const value = await this.waitForElement(selector, waitTimeInSecs);
@@ -107,4 +110,48 @@ export class DomObserver {
         });
         */
   }
+
+  /**
+   * Observe changes in given selector and callback 
+   * @param targetNode
+   * @param callback 
+   */
+
+  observeChanges(targetNode: any,
+    callback: any, config: any = { attributes: true, childList: true, subtree: true }) {
+    const logPrefix = `${this.name} - observeChanges`;
+    const logger = new Logger(logPrefix);
+    if (typeof callback !== "function") {
+      logger.log("invalid callback function");
+      throw new TypeError("invalid callback function");
+    }
+    if (!!targetNode) {
+
+      const moCallback = function (mutationsList, observer) {
+        for (let mutation of mutationsList) {
+          if (mutation.type === 'childList' || mutation.type === 'attributes') {
+            //disconnect observer
+            observer.disconnect();
+            callback();
+          }
+          else {
+            //skio
+          }
+        }
+      };
+
+      const observer = new MutationObserver(moCallback);
+
+      observer.observe(targetNode, config);
+    } else {
+      logger.log("invalid target node");
+      throw new TypeError("invalid target node");
+    }
+
+
+
+
+  }
+
+
 }

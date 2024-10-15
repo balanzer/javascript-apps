@@ -31,13 +31,29 @@ let intervalId = setInterval(() => {
 setTimeout(() => {
   clearInterval(intervalId);
 }, 10000);
-function callback(selector: any, value: string) {
+
+
+function watcherCallback(selector: any, value: string) {
   logger.info("callback for selector: ", selector, ", value : ", value);
 }
 //create obj
 
 const domObserver: DomObserver = new DomObserver("index");
-domObserver.watchSelector(".myclass-5", 6, callback);
-domObserver.watchSelector(".myclass-3", 4, callback);
-domObserver.watchSelector(".myclass-no-id", 4, callback);
+domObserver.watchSelector(".myclass-5", 6, watcherCallback);
+domObserver.watchSelector(".myclass-3", 4, watcherCallback);
+domObserver.watchSelector(".myclass-no-id", 4, watcherCallback);
+
+
+//observe changes 
+
+function observerCallback() {
+  logger.info("changes observed.");
+}
+
+const targetNode = document.querySelector('div.my-div-container');
+
+domObserver.observeChanges(targetNode, observerCallback);
+
+
+
 /** Mutation observer - end */
