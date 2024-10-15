@@ -37,7 +37,7 @@ export class DomObserver {
         const observer = new MutationObserver(() => {
           const element = document.querySelector(selector);
           if (element) {
-            logger.log(selector, " selector ready");
+            //logger.log(selector, " selector ready");
             resolve("ready");
             observer.disconnect();
           }
@@ -48,7 +48,7 @@ export class DomObserver {
           subtree: true,
         });
       } catch (err) {
-        logger.log("observer error : ", err);
+        //logger.log("observer error : ", err);
         reject("error " + err);
       }
     });
@@ -84,14 +84,14 @@ export class DomObserver {
         throw new TypeError("invalid callback function");
       }
       const value = await this.waitForElement(selector, waitTimeInSecs);
-      logger.log(selector, " selector ready : " + value);
+      //logger.log(selector, " selector ready : " + value);
       //callback
-      callback(value);
+      callback(selector, value);
     } catch (error) {
-      logger.log(selector, " selector error : " + error);
+      //logger.log(selector, " selector error : " + error);
       //return error message
       if (typeof callback === "function") {
-        callback(error);
+        callback(selector, error);
       }
     }
 
