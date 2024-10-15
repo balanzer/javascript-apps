@@ -9,6 +9,7 @@
   "author": "Murali Varatharajan",
   "license": "ISC",
   "devDependencies": {
+    "@types/jquery": "^3.5.31",
     "browserify": "^17.0.1",
     "fancy-log": "^2.0.0",
     "gulp": "^4.0.0",
@@ -30,6 +31,7 @@
     "watchify": "^4.0.0"
   },
   "dependencies": {
-    "@types/web": "^0.0.171"
+    "@types/web": "^0.0.171",
+    "jquery": "^3.7.1"
   }
 }

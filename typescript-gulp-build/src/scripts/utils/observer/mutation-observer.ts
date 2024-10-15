@@ -135,7 +135,7 @@ export class DomObserver {
 
     if (!!targetNode) {
 
-      const moCallback = function (mutationsList, observer) {
+      const moCallback = function (mutationsList: any, observer: any) {
         for (let mutation of mutationsList) {
           if (mutation.type === 'childList' || mutation.type === 'attributes') {
             //disconnect observer
@@ -153,7 +153,7 @@ export class DomObserver {
         }
       };
 
-      const observer = new MutationObserver(moCallback);
+      const observer: any = new MutationObserver(moCallback);
 
       observer.observe(targetNode, config);
     } else {

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
     "module": "commonjs",
     "outDir": "./dist/",
     "target": "es6",
