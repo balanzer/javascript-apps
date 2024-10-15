@@ -1,0 +1,14 @@
+{
+  "entryPoints": ["./src/scripts"],
+  "tsconfig": "./tsconfig.json",
+  "out": "./docs/",
+  "entryPointStrategy": "expand",
+  "compilerOptions": {
+    "strictNullChecks": false
+  },
+  "markdownItOptions": {
+    "html": true,
+    "linkify": true
+  },
+  "exclude": ["**/test/*.ts", "**/ab-tests/**/*.ts"]
+}

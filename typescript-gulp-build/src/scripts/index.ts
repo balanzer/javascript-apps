@@ -1,30 +1,38 @@
-import { SayHello } from "./test/hello";
-import { Greetings } from "./test/greetings";
+/**
+ * index.ts - to test features.
+ */
+
 import { Logger } from "./common/logger/Logger";
+import { DomObserver } from "./utils/observer/mutation-observer";
 
-interface User {
-  name: string;
-  id: number;
+const logger = new Logger("index");
+
+logger.info("start");
+
+/** Mutation observer - start */
+
+let intervalId = setInterval(() => {
+  //create a div to test mutation observer changes
+  //logger.log("mutation-example - create test div");
+
+  const newDiv = document.createElement("div");
+  newDiv.classList.add("my-class");
+  newDiv.textContent = "test content";
+  document.body.appendChild(newDiv);
+}, 500);
+
+setTimeout(() => {
+  clearInterval(intervalId);
+}, 5000);
+function callback(value) {
+  logger.info("callback value : ", value);
 }
+//create obj
 
-class UserAccount {
-  name: string;
-  id: number;
+const domObserver: DomObserver = new DomObserver("index");
+domObserver.watchSelector(".apple", 3, callback);
+domObserver.watchSelector(".my-class1", 6, callback);
+domObserver.watchSelector(".my-class", 4, callback);
+/** Mutation observer - end */
 
-  constructor(name: string, id: number) {
-    this.name = name;
-    this.id = id;
-  }
-}
-
-const user: User = new UserAccount("Murali232", 1001);
-
-const logger = new Logger("UserAccount");
-
-logger.info(`User - id: ${user.id}, name: ${user.name}`);
-new SayHello().sayHello(user.name);
-new Greetings().greet(user.name);
-
-logger.info(`mutiple values : `, "12", "13", "14", "15", "16");
-
-logger.error(`error message test`);
+logger.info("end");
