@@ -77,7 +77,7 @@ export class DomObserver {
       " secs"
     );
     try {
-      if (waitTimeInSecs > 20) {
+      if (waitTimeInSecs > 20 || waitTimeInSecs <= 0) {
         logger.log("invalid wait time ", waitTimeInSecs);
         throw new TypeError("invalid wait time");
       }
@@ -111,20 +111,28 @@ export class DomObserver {
         */
   }
 
+
   /**
    * Observe changes in given selector and callback 
-   * @param targetNode
+   * @param targetNode 
    * @param callback 
+   * @param responseDelayInSecs 
+   * @param config 
    */
-
   observeChanges(targetNode: any,
-    callback: any, config: any = { attributes: true, childList: true, subtree: true }) {
+    callback: any, responseDelayInSecs: number = 0.3, config: any = { attributes: true, childList: true, subtree: true }) {
     const logPrefix = `${this.name} - observeChanges`;
     const logger = new Logger(logPrefix);
     if (typeof callback !== "function") {
       logger.log("invalid callback function");
       throw new TypeError("invalid callback function");
     }
+
+    if (responseDelayInSecs > 1 || responseDelayInSecs <= 0) {
+      logger.log("invalid delay ", responseDelayInSecs);
+      throw new TypeError("invalid delay");
+    }
+
     if (!!targetNode) {
 
       const moCallback = function (mutationsList, observer) {
@@ -132,10 +140,15 @@ export class DomObserver {
           if (mutation.type === 'childList' || mutation.type === 'attributes') {
             //disconnect observer
             observer.disconnect();
-            callback();
+
+            //response after delay
+            setTimeout(() => {
+              callback();
+            }, responseDelayInSecs * 1000);
+
           }
           else {
-            //skio
+            //skip
           }
         }
       };
@@ -147,8 +160,6 @@ export class DomObserver {
       logger.log("invalid target node");
       throw new TypeError("invalid target node");
     }
-
-
 
 
   }

@@ -52,7 +52,7 @@ function observerCallback() {
 
 const targetNode = document.querySelector('div.my-div-container');
 
-domObserver.observeChanges(targetNode, observerCallback);
+domObserver.observeChanges(targetNode, observerCallback, 0.2);
 
 
 
