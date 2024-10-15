@@ -48,6 +48,8 @@ domObserver.watchSelector(".myclass-no-id", 4, watcherCallback);
 
 function observerCallback() {
   logger.info("changes observed.");
+
+  domObserver.observeChanges(targetNode, observerCallback, 0.5);
 }
 
 const targetNode = document.querySelector('div.my-div-container');
