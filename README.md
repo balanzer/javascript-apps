@@ -1,15 +1,3 @@
-# javascript-apps
-
-repo for random java script apps
-
-## Create new application folders
-
-`mkdir new-app && cd new-app`
-
-## init new project
-
-`npm init -y`
-
 ## Clean install a project
 
 npm ci
@@ -18,21 +6,42 @@ npm ci
 
 npm install
 
-## Compile
+## Install Parcel - for live reload
 
-tsc or tsc-w  `to watch`
+npm install --save-dev parcel
 
-## Run JS
+## GULP
 
-node build/index.js
+`gulp build`
 
-## install NodeMon & Concurrently
+`build-watchify`
 
-npm install nodemon concurrently --save-dev
+## Run with Parcel for live reload
 
-## start process
+npx parcel index.html
 
-npm start
+and try http://localhost:1234/
 
+## Type Doc
 
+# Install
 
+npm install --save-dev typedoc
+
+npm install --save-dev typedoc typedoc-plugin-md
+
+# Execute typedoc
+
+### HTML version
+
+npx typedoc --options typedoc.json
+
+npx typedoc --out ./docs ./src/scripts/index.ts
+
+npx typedoc --out ./docs --entryPointStrategy expand ./src/scripts
+
+### Markdown documentation
+
+npx typedoc --plugin typedoc-plugin-md --out ./docs ./src/scripts/index.ts
+
+npx typedoc --plugin typedoc-plugin-md --out ./docs --entryPointStrategy expand ./src/scripts
