@@ -6,7 +6,8 @@ import { Logger } from "./common/logger/Logger";
 import { DomObserver } from "./utils/observer/mutation-observer";
 
 //importing jquery will download js lib and added to bundle.js file
-import jQuery from "jquery"; //import not reqd if jQuery already exists
+//import not reqd if jQuery already exists
+//import jQuery from "jquery";
 
 declare let global: any;
 global.jQuery = jQuery;

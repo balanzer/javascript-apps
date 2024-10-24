@@ -14,7 +14,7 @@ npm install --save-dev parcel
 
 `gulp build`
 
-`build-watchify`
+`gulp build-watchify`
 
 ## Run with Parcel for live reload
 
