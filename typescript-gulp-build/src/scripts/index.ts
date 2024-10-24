@@ -3,7 +3,7 @@
  */
 
 import { Logger } from "./common/logger/Logger";
-import { DomObserver } from "./utils/observer/mutation-observer";
+import { DomObserver } from "./common/utils/observer/mutation-observer";
 
 //importing jquery will download js lib and added to bundle.js file
 //import not reqd if jQuery already exists

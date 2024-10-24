@@ -1,4 +1,4 @@
-import { Logger } from "../../common/logger/Logger";
+import { Logger } from "../../logger/Logger";
 export class CreateElements {
   logger = new Logger("CreateElements");
 }

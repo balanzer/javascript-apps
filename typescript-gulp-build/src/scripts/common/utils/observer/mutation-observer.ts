@@ -1,4 +1,4 @@
-import { Logger } from "../../common/logger/Logger";
+import { Logger } from "../../logger/Logger";
 /**
  * DomObserver to observe changes in dom.
  */
@@ -6,7 +6,7 @@ export class DomObserver {
   /**
    * DomObserver to observe changes in dom.
    */
-  constructor(private readonly name: string) { }
+  constructor(private readonly name: string) {}
 
   /**
    * to watch for element
@@ -54,13 +54,11 @@ export class DomObserver {
     });
   }
 
-
-
   /**
    * watcher - to watch selector loaded or not, timeout after given waitTimeInSecs
-   * @param selector 
-   * @param waitTimeInSecs 
-   * @param callback 
+   * @param selector
+   * @param waitTimeInSecs
+   * @param callback
    */
   async watchSelector(
     selector: string,
@@ -111,16 +109,19 @@ export class DomObserver {
         */
   }
 
-
   /**
-   * Observe changes in given selector and callback 
-   * @param targetNode 
-   * @param callback 
-   * @param responseDelayInSecs 
-   * @param config 
+   * Observe changes in given selector and callback
+   * @param targetNode
+   * @param callback
+   * @param responseDelayInSecs
+   * @param config
    */
-  observeChanges(targetNode: any,
-    callback: any, responseDelayInSecs: number = 0.3, config: any = { attributes: true, childList: true, subtree: true }) {
+  observeChanges(
+    targetNode: any,
+    callback: any,
+    responseDelayInSecs: number = 0.3,
+    config: any = { attributes: true, childList: true, subtree: true }
+  ) {
     const logPrefix = `${this.name} - observeChanges`;
     const logger = new Logger(logPrefix);
     if (typeof callback !== "function") {
@@ -134,10 +135,9 @@ export class DomObserver {
     }
 
     if (!!targetNode) {
-
       const moCallback = function (mutationsList: any, observer: any) {
         for (let mutation of mutationsList) {
-          if (mutation.type === 'childList' || mutation.type === 'attributes') {
+          if (mutation.type === "childList" || mutation.type === "attributes") {
             //disconnect observer
             observer.disconnect();
 
@@ -145,9 +145,7 @@ export class DomObserver {
             setTimeout(() => {
               callback();
             }, responseDelayInSecs * 1000);
-
-          }
-          else {
+          } else {
             //skip
           }
         }
@@ -160,9 +158,5 @@ export class DomObserver {
       logger.log("invalid target node");
       throw new TypeError("invalid target node");
     }
-
-
   }
-
-
 }
