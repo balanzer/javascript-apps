@@ -60,7 +60,7 @@ export class DomObserver {
    * @param waitTimeInSecs
    * @param callback
    */
-  async watchSelector(
+  async watchForChanges(
     selector: string,
     waitTimeInSecs: number = 5,
     callback: any
@@ -110,53 +110,118 @@ export class DomObserver {
   }
 
   /**
-   * Observe changes in given selector and callback
-   * @param targetNode
+   * Wait for element to load, once loaded or after timeout and callback
+   * @param targetNodeSelector
    * @param callback
-   * @param responseDelayInSecs
+   * @param retryDelayInSecs
+   * @param maxRetry
    * @param config
    */
-  observeChanges(
-    targetNode: any,
+  notifyWhenElementReady(
+    targetNodeSelector: string,
     callback: any,
-    responseDelayInSecs: number = 0.3,
+    retryDelayInSecs: number = 0.3,
+    maxRetry: number = 20,
     config: any = { attributes: true, childList: true, subtree: true }
   ) {
     const logPrefix = `${this.name} - observeChanges`;
     const logger = new Logger(logPrefix);
+
     if (typeof callback !== "function") {
       logger.log("invalid callback function");
       throw new TypeError("invalid callback function");
     }
 
-    if (responseDelayInSecs > 1 || responseDelayInSecs <= 0) {
-      logger.log("invalid delay ", responseDelayInSecs);
-      throw new TypeError("invalid delay");
+    if (retryDelayInSecs > 1.1 || retryDelayInSecs <= 0) {
+      logger.log("invalid retry delay : ", retryDelayInSecs);
+      throw new TypeError("invalid retry delay : " + retryDelayInSecs);
     }
 
-    if (!!targetNode) {
-      const moCallback = function (mutationsList: any, observer: any) {
-        for (let mutation of mutationsList) {
-          if (mutation.type === "childList" || mutation.type === "attributes") {
-            //disconnect observer
-            observer.disconnect();
+    if (maxRetry > 100 || maxRetry <= 0) {
+      logger.log("invalid retry value : ", maxRetry);
+      throw new TypeError("invalid retry value : " + maxRetry);
+    }
 
-            //response after delay
-            setTimeout(() => {
-              callback();
-            }, responseDelayInSecs * 1000);
+    //countdown counter
+    let counter = 0; //retry counter < maxRetry
+
+    let intervalId = setInterval(() => {
+      try {
+        counter = counter + 1;
+        if (!!targetNodeSelector) {
+          const targetNode = document.querySelector(targetNodeSelector);
+          if (!!targetNode) {
+            clearInterval(intervalId);
+
+            //selector ready
+            //return callback with status success
+            callback(true, "selector ready", targetNodeSelector);
           } else {
-            //skip
+            logger.log("selector missing");
           }
+        } else {
+          logger.log("invalid target node");
+          throw new TypeError("invalid target node");
         }
-      };
 
-      const observer: any = new MutationObserver(moCallback);
+        //clear interval after max retry
 
-      observer.observe(targetNode, config);
-    } else {
-      logger.log("invalid target node");
-      throw new TypeError("invalid target node");
-    }
+        if (counter >= maxRetry) {
+          clearInterval(intervalId);
+          //return callback with status failed
+          callback(false, "selector not found", targetNodeSelector);
+        }
+      } catch (err) {
+        logger.info("err :", err);
+      }
+    }, retryDelayInSecs * 1000);
+
+    // clear interval (for error scenarios) after 8 secs
+    setTimeout(() => {
+      clearInterval(intervalId);
+    }, 8000);
   }
+}
+
+/**
+ * This is not util function.
+ * Example snippet to show to to use
+ */
+function __howToExample1() {
+  //observer call back function
+  function observerCallback() {
+    // Handle callback
+  }
+
+  //target dom element or note
+  const targetNodeSelector = "div.my-div-container";
+  const retryDelayInSecs: number = 0.2; //wait interval to check node exists or not
+  const maxRetry: number = 5; //max retry;
+
+  const domObserver: DomObserver = new DomObserver("file-name");
+  domObserver.notifyWhenElementReady(
+    targetNodeSelector,
+    observerCallback,
+    retryDelayInSecs,
+    maxRetry
+  );
+}
+
+/**
+ * This is not util function.
+ * Example snippet to show to to use
+ */
+function __howToExample2() {
+  //watcher call back function
+  function watcherCallback(selector: any, value: string) {
+    // Handle callback
+    //logger.info("callback for selector: ", selector, ", value : ", value);
+  }
+
+  //target dom element or note
+  const targetSelector = ".myclass-5";
+  const waitTimeInSecs: number = 5; //wait interval to check node exists or not
+
+  const domObserver: DomObserver = new DomObserver("file-name");
+  domObserver.watchForChanges(targetSelector, waitTimeInSecs, watcherCallback);
 }

@@ -37,7 +37,7 @@ let intervalId = setInterval(() => {
   } catch (err) {
     logger.info("err :", err);
   }
-}, 500);
+}, 50000);
 
 setTimeout(() => {
   clearInterval(intervalId);
@@ -57,23 +57,36 @@ function watcherCallback(selector: any, value: string) {
 //create obj
 
 const domObserver: DomObserver = new DomObserver("index");
-domObserver.watchSelector(".myclass-5", 6, watcherCallback);
-domObserver.watchSelector(".myclass-3", 4, watcherCallback);
-domObserver.watchSelector(".myclass-no-id", 4, watcherCallback);
-
+/*
+domObserver.watchForChanges(".myclass-5", 6, watcherCallback);
+domObserver.watchForChanges(".myclass-3", 4, watcherCallback);
+domObserver.watchForChanges(".myclass-no-id", 4, watcherCallback);
+*/
 //observe changes
 
-function observerCallback() {
+function observerCallback(status, message, selector) {
   try {
-    logger.info("changes observed.");
-    domObserver.observeChanges(targetNode, observerCallback, 0.5);
+    logger.info(
+      "observed selector status : ",
+      status,
+      ", message : ",
+      message,
+      ", selector : ",
+      selector
+    );
   } catch (err) {
     logger.info("err :", err);
   }
 }
 
-const targetNode = document.querySelector("div.my-div-container");
+const targetNodeSelector = "div.my-div-container1";
+logger.info("check for : ", targetNodeSelector);
 
-domObserver.observeChanges(targetNode, observerCallback, 0.2);
+domObserver.notifyWhenElementReady(
+  targetNodeSelector,
+  observerCallback,
+  0.2,
+  10
+);
 
 /** Mutation observer - end */

@@ -1,8 +1,9 @@
 const path = require("path");
 
+const entryFileName = "index.ts";
 const sourceRoot = "src/scripts/";
 const styleRoot = "src/styles/";
-const scriptMain = sourceRoot + "index.ts";
+const scriptMain = sourceRoot + entryFileName;
 const buildRoot = "./dist/";
 const bundleRoot = buildRoot;
 
