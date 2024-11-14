@@ -75,7 +75,7 @@ function observerCallback(status, message, selector) {
     logger.info("err :", err);
   }
 }
-
+/*
 const targetNodeSelector = "div.my-div-container1";
 logger.info("check for : ", targetNodeSelector);
 
@@ -85,7 +85,7 @@ domObserver.notifyWhenElementReady(
   0.2,
   10
 );
-
+*/
 /** Mutation observer - end */
 
 /** Test Impl - start */
