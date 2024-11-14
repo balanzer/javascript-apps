@@ -2,6 +2,7 @@
  * index.ts - to test features.
  */
 
+import { Impl_2024_XX_EXP_B } from "./ab-tests/2024/xx/exp-b/2024-XX-EXP-B-Impl";
 import { Logger } from "./common/logger/Logger";
 import { DomObserver } from "./common/utils/observer/mutation-observer";
 
@@ -37,7 +38,7 @@ let intervalId = setInterval(() => {
   } catch (err) {
     logger.info("err :", err);
   }
-}, 50000);
+}, 500);
 
 setTimeout(() => {
   clearInterval(intervalId);
@@ -57,11 +58,7 @@ function watcherCallback(selector: any, value: string) {
 //create obj
 
 const domObserver: DomObserver = new DomObserver("index");
-/*
-domObserver.watchForChanges(".myclass-5", 6, watcherCallback);
-domObserver.watchForChanges(".myclass-3", 4, watcherCallback);
-domObserver.watchForChanges(".myclass-no-id", 4, watcherCallback);
-*/
+
 //observe changes
 
 function observerCallback(status, message, selector) {
@@ -90,3 +87,8 @@ domObserver.notifyWhenElementReady(
 );
 
 /** Mutation observer - end */
+
+/** Test Impl - start */
+
+const impl = new Impl_2024_XX_EXP_B();
+impl.greet("my-name");
