@@ -41,7 +41,7 @@ gulp.task("browserify", function () {
     cache: {},
     packageCache: {},
   })
-    .plugin(tsify, { noImplicitAny: true })
+    .plugin(tsify, { noImplicitAny: false })
     .bundle()
     .pipe(source("bundle.js"))
     .pipe(buffer())
