@@ -6,6 +6,10 @@ npm ci
 
 npm install
 
+## Install gulp
+
+npm install --global gulp-cli
+
 ## Install Parcel - for live reload
 
 npm install --save-dev parcel
