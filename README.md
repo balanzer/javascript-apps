@@ -1,3 +1,7 @@
+## Create package.json file
+
+npm init -y
+
 ## Clean install a project
 
 npm ci
