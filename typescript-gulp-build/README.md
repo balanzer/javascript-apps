@@ -49,3 +49,9 @@ npx typedoc --out ./docs --entryPointStrategy expand ./src/scripts
 npx typedoc --plugin typedoc-plugin-md --out ./docs ./src/scripts/index.ts
 
 npx typedoc --plugin typedoc-plugin-md --out ./docs --entryPointStrategy expand ./src/scripts
+
+## TODO - Pending
+
+## Generate src from templates
+
+npm run generate (pending)

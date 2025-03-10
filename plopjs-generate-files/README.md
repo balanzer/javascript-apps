@@ -1,3 +1,3 @@
 ### run
 
-npm rum plop
+npm run plop

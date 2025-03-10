@@ -4,7 +4,8 @@
   "description": "Typescript to JS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "plop"
   },
   "author": "Murali Varatharajan",
   "license": "ISC",
@@ -21,6 +22,7 @@
     "gulp-terser": "^2.1.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "parcel": "^2.12.0",
+    "plop": "^4.0.1",
     "tsify": "^5.0.4",
     "tsproject": "^4.1.0-dev.1",
     "typedoc": "^0.26.9",
