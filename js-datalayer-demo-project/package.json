@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "d": "^1.0.2",
+    "miragejs": "^0.1.48",
     "parcel": "^2.13.3"
   }
 }
