@@ -1,10 +1,12 @@
 import { makeServer } from "./server/server";
+import { Logger } from "./logger/log";
 
-console.log("environment : ", process.env.NODE_ENV);
+const logger = new Logger("app");
 
+/**
+ * Setup mock backend data
+ */
+logger.info("environment : ", process.env.NODE_ENV);
 if (process.env.NODE_ENV === "development") {
   makeServer({ environment: "development" });
 }
-
-const name = "appleaws";
-console.log("Hello : ", name);

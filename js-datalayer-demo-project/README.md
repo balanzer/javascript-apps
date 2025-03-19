@@ -1,5 +1,8 @@
 # Data Layer Demo
 
+### Clean install a project
+npm ci
+
 ## Run with Parcel for live reload
 
 `npx parcel src/index.html`
