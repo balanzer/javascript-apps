@@ -3,6 +3,10 @@ export class Logger {
     this.name = module;
   }
 
+  log(message, ...args) {
+    console.info(`[${this.name}] ${message}`, ...args);
+  }
+
   debug(message, ...args) {
     console.info(`[${this.name}] ${message}`, ...args);
   }
